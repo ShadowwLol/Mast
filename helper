@@ -1,0 +1,87 @@
+#!/bin/bash
+PS3='> '
+percentagemenu=( "Discount" "Increase" "Simple Percentage" "Percentage of X from Y" "Increase / Decrease" );
+menus=( "Exit" "Percentage" "Average" "Proportion" "Ratio" "Equations" "Fractions" "GCF / LCM" "Combinations" "Prime Checker" "Number Generator" "Shapes" "Bodies" "Acceleration" "Angle" "Area" "Cooking" "Data Storage" "Data Transfer" "Energy" "Force" "Fuel" "Lenght" "Numeric Base" "Power" "Pressure" "Ring Size" "Roman Numerals" "Shoe Size" "Speed" "Temperature" "Time" "Torque" "Volume" "Volumetric Flow" "Weight" "Currency Converter" "Unit Price" "Sales Tax" "Tip" "Loan" "Interest" "Body Mass Index" "Daily Caloric Burn" "Body Fat Percentage" "Age" "Date" "Time" "Mileage" "Ohm's Law" );
+appname="Helper"
+
+help() {
+	case $1 in
+	"y")
+	clear
+	printf "H E L P E R\n"
+	printf "Helper -> $option\n" ;;
+	"n")
+	clear
+	printf "H E L P E R\n"
+	printf "Helper -> $option -> $2\n" ;;
+	esac
+}
+
+discountmenu() {
+	printf "Initial value: "
+	read -r initialvalue
+	help n $perchoice
+	printf "Discount: "
+	read -r discount #| sed "s/%//g"
+	help n $perchoice
+	printf '\n%s' "Initial value ($): "
+	printf '%0.2f\n' "$initialvalue"
+	printf '%s' "Discount (%): "
+	printf '%0.1f\n' "$discount"
+	saving=$(bc <<< "scale=2; ($discount/100)*$initialvalue")
+	finalvalue=$(bc <<< "scale=2; $initialvalue-$saving")
+	printf '%s' "Final value ($): "
+	printf '%0.2f\n' "$finalvalue"
+	printf '%s' "Saving ($): "
+	printf '%0.2f\n' "$saving"
+	read -s pause
+	start
+}
+
+increasemenu() {
+	printf "Initial value: "
+	read -r initialvalue
+	help n $perchoice
+	printf "Increase: "
+	read -r increase #| sed "s/%//g"
+	help n $perchoice
+	printf '\n%s' "Initial value ($): "
+	printf '%0.2f\n' "$initialvalue"
+	printf '%s' "Increase (%): "
+	printf '%0.1f\n' "$increase"
+	raise=$(bc <<< "scale=2; ($increase/100)*$initialvalue")
+	finalvalue=$(bc <<< "scale=2; $initialvalue+$raise")
+	printf '%s' "Final value ($): "
+	printf '%0.2f\n' "$finalvalue"
+	printf '%s' "Raise ($): "
+	printf '%0.2f\n' "$raise"
+	read -s pause
+	start
+}
+
+start() {
+	clear
+	printf "H E L P E R\n"
+	select option in "${menus[@]}"
+	do
+		help y
+		case $option in
+		"Percentage")
+		select perchoice in "${percentagemenu[@]}"
+		do
+			help n $perchoice
+			case $perchoice in
+			"Discount") discountmenu ;;
+			"Increase") increasemenu ;;
+			esac
+		done
+		;;
+		"Exit") exit 0 ;;
+		esac
+	done
+}
+
+start
+
+# since this is a two menu program i should put the first select statement in a function so that then i can make "back" buttons 
+# check out column command
