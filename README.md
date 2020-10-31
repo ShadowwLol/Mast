@@ -5,7 +5,7 @@ Mast: A helper tool for day to day matters.
 
 Percentage [X]
 
-Average [ ]
+Average [X]
 
 Proportion [ ]
 
