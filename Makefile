@@ -5,4 +5,4 @@ SRCDIR = ./src/
 SOURCES = $(SRCDIR)*.c
 
 mast:
-	$(CC) $(SOURCES) $(CFLAGS) -o $@
+	$(CC) $(SOURCES) $(CFLAGS) -o Mast

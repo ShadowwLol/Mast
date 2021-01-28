@@ -6,10 +6,10 @@ void average (){
     double addition = 0;
     double times = 1;
     double sum = 0;
-    printf("\nPlease Enter The A Amount Of Numbers: ");
+    printf("\nPlease Enter The Amount Of Numbers: ");
     scanf("%d", &amount);
 
-    printf("\nPlease Enter %d numbers.\n> ", amount);
+    printf("\nPlease Enter %d Numbers.\n> ", amount);
     for (i = 0; i < amount; i++)
     {
         scanf("%d", &nums[i]);
@@ -31,8 +31,8 @@ void average (){
         }
     }
     printf("}\n");
-    printf("Arithmetic average: %f\n", aritaverage);
-    printf("Geometrical average: %f\n", geoaverage);
-    printf("Harmonic average: %f\n", harmaverage);
+    printf("Arithmetic average: %0.2f\n", aritaverage);
+    printf("Geometrical average: %0.2f\n", geoaverage);
+    printf("Harmonic average: %0.2f\n", harmaverage);
     clean();
 }
